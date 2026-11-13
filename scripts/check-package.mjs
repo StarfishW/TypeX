@@ -92,7 +92,8 @@ let resources = ''
       resources
     )
     check('no errors', errors.length === 0, errors.slice(0, 3).join(' | '))
-    if (process.env.SMOKE_OUT) await page.screenshot({ path: join(process.env.SMOKE_OUT, 'packaged.png') })
+    // A screenshot is a visual aid, not a check; a failed capture must not fail the run.
+    if (process.env.SMOKE_OUT) await page.screenshot({ path: join(process.env.SMOKE_OUT, 'packaged.png') }).catch(() => {})
   } catch (err) {
     console.log('ERROR', err)
     problems.push(String(err?.message || err).split('\n')[0])

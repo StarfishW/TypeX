@@ -99,7 +99,10 @@ page.on('pageerror', (e) => {
   errors.push(e.message)
 })
 
-const shot = (name) => page.screenshot({ path: join(out, name) })
+// Screenshots are for people looking at a run, not checks; capturing a virtual
+// display (Xvfb on CI) occasionally fails, which must not fail the suite.
+const shot = (name) =>
+  page.screenshot({ path: join(out, name) }).catch((err) => console.log(`(screenshot ${name} skipped: ${String(err.message).split('\n')[0]})`))
 const text = () => page.evaluate(() => window.__typexApp.getText())
 const mod = 'Control'
 

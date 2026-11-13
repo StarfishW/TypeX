@@ -56,7 +56,10 @@ page.on('pageerror', (e) => {
 const key = (k) => page.keyboard.press(k)
 const type = (t) => page.keyboard.type(t)
 const text = () => page.evaluate(() => window.__typexApp.getText())
-const shot = (name) => page.screenshot({ path: join(out, name) })
+// Screenshots are for people looking at a run, not checks; capturing a virtual
+// display (Xvfb on CI) occasionally fails, which must not fail the suite.
+const shot = (name) =>
+  page.screenshot({ path: join(out, name) }).catch((err) => console.log(`(screenshot ${name} skipped: ${String(err.message).split('\n')[0]})`))
 const settle = (ms = 150) => page.waitForTimeout(ms)
 /** Replaces the document and puts the caret at its end. */
 const load = async (md) => {
