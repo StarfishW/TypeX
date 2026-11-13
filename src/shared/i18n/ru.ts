@@ -259,6 +259,7 @@ export const ru: Messages = {
   'editor.emptyDiagram': 'Пустая диаграмма',
   'editor.tocEmpty': 'Оглавление: добавьте заголовки, чтобы заполнить его',
   'editor.imageNotFound': 'Изображение не найдено: {name}',
+  'slash.diagram': 'Диаграмма',
 
   'prefs.title': 'Настройки',
   'prefs.general': 'Общие',
@@ -296,6 +297,8 @@ export const ru: Messages = {
   'prefs.typing': 'Ввод',
   'prefs.autoPair': 'Автоматически закрывать скобки и кавычки',
   'prefs.spellcheck': 'Проверка орфографии',
+  'prefs.slashCommands': 'Команды через «/»',
+  'prefs.slashHint': 'Введите /, чтобы вставить заголовки, списки, таблицы и другое',
   'prefs.codeFences': 'Блоки кода',
   'prefs.lineNumbers': 'Показывать номера строк',
   'prefs.wrap': 'Переносить длинные строки',

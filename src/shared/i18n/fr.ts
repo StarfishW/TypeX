@@ -255,6 +255,7 @@ export const fr: Messages = {
   'editor.emptyDiagram': 'Diagramme vide',
   'editor.tocEmpty': 'Table des matières : ajoutez des titres pour la remplir',
   'editor.imageNotFound': 'Image introuvable : {name}',
+  'slash.diagram': 'Diagramme',
 
   'prefs.title': 'Préférences',
   'prefs.general': 'Général',
@@ -292,6 +293,8 @@ export const fr: Messages = {
   'prefs.typing': 'Saisie',
   'prefs.autoPair': 'Fermer automatiquement parenthèses et guillemets',
   'prefs.spellcheck': 'Vérification orthographique',
+  'prefs.slashCommands': 'Commandes « / »',
+  'prefs.slashHint': 'Tapez / pour insérer des titres, listes, tableaux et plus',
   'prefs.codeFences': 'Blocs de code',
   'prefs.lineNumbers': 'Afficher les numéros de ligne',
   'prefs.wrap': 'Renvoyer les longues lignes à la ligne',

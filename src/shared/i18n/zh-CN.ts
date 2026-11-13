@@ -252,6 +252,7 @@ export const zhCN: Messages = {
   'editor.emptyDiagram': '空图表',
   'editor.tocEmpty': '内容目录：添加标题后会显示在这里',
   'editor.imageNotFound': '找不到图片：{name}',
+  'slash.diagram': '图表',
 
   'prefs.title': '偏好设置',
   'prefs.general': '通用',
@@ -287,6 +288,8 @@ export const zhCN: Messages = {
   'prefs.typing': '输入',
   'prefs.autoPair': '自动配对括号和引号',
   'prefs.spellcheck': '拼写检查',
+  'prefs.slashCommands': '斜杠命令',
+  'prefs.slashHint': '输入 / 快速插入标题、列表、表格等',
   'prefs.codeFences': '代码块',
   'prefs.lineNumbers': '显示行号',
   'prefs.wrap': '自动换行',

@@ -12,7 +12,7 @@ let platform = 'win32'
 export function setLocale(locale: Locale, os: string): void {
   translator = createTranslator(locale)
   platform = os
-  document.documentElement.lang = locale
+  if (typeof document !== 'undefined') document.documentElement.lang = locale
 }
 
 export const t = (key: MessageKey, params?: Params): string => translator(key, params)

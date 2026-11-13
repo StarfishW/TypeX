@@ -253,6 +253,7 @@ export const ko: Messages = {
   'editor.emptyDiagram': '빈 다이어그램',
   'editor.tocEmpty': '목차: 제목을 추가하면 여기에 표시됩니다',
   'editor.imageNotFound': '이미지를 찾을 수 없음: {name}',
+  'slash.diagram': '다이어그램',
 
   'prefs.title': '환경설정',
   'prefs.general': '일반',
@@ -288,6 +289,8 @@ export const ko: Messages = {
   'prefs.typing': '입력',
   'prefs.autoPair': '괄호와 따옴표 자동으로 닫기',
   'prefs.spellcheck': '맞춤법 검사',
+  'prefs.slashCommands': '슬래시 명령',
+  'prefs.slashHint': '/를 입력해 제목, 목록, 표 등을 삽입',
   'prefs.codeFences': '코드 블록',
   'prefs.lineNumbers': '줄 번호 표시',
   'prefs.wrap': '긴 줄 자동 줄 바꿈',

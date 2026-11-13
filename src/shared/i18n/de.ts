@@ -255,6 +255,7 @@ export const de: Messages = {
   'editor.emptyDiagram': 'Leeres Diagramm',
   'editor.tocEmpty': 'Inhaltsverzeichnis: Fügen Sie Überschriften hinzu, um es zu füllen',
   'editor.imageNotFound': 'Bild nicht gefunden: {name}',
+  'slash.diagram': 'Diagramm',
 
   'prefs.title': 'Einstellungen',
   'prefs.general': 'Allgemein',
@@ -292,6 +293,8 @@ export const de: Messages = {
   'prefs.typing': 'Eingabe',
   'prefs.autoPair': 'Klammern und Anführungszeichen automatisch schließen',
   'prefs.spellcheck': 'Rechtschreibprüfung',
+  'prefs.slashCommands': 'Slash-Befehle',
+  'prefs.slashHint': '/ tippen, um Überschriften, Listen, Tabellen und mehr einzufügen',
   'prefs.codeFences': 'Codeblöcke',
   'prefs.lineNumbers': 'Zeilennummern anzeigen',
   'prefs.wrap': 'Lange Zeilen umbrechen',

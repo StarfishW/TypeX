@@ -255,6 +255,7 @@ export const ptBR: Messages = {
   'editor.emptyDiagram': 'Diagrama vazio',
   'editor.tocEmpty': 'Sumário: adicione títulos para preenchê-lo',
   'editor.imageNotFound': 'Imagem não encontrada: {name}',
+  'slash.diagram': 'Diagrama',
 
   'prefs.title': 'Preferências',
   'prefs.general': 'Geral',
@@ -292,6 +293,8 @@ export const ptBR: Messages = {
   'prefs.typing': 'Digitação',
   'prefs.autoPair': 'Fechar parênteses e aspas automaticamente',
   'prefs.spellcheck': 'Verificação ortográfica',
+  'prefs.slashCommands': 'Comandos de barra',
+  'prefs.slashHint': 'Digite / para inserir títulos, listas, tabelas e mais',
   'prefs.codeFences': 'Blocos de código',
   'prefs.lineNumbers': 'Mostrar números de linha',
   'prefs.wrap': 'Quebrar linhas longas',

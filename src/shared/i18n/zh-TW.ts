@@ -252,6 +252,7 @@ export const zhTW: Messages = {
   'editor.emptyDiagram': '空白的圖表',
   'editor.tocEmpty': '目錄：新增標題後會顯示在這裡',
   'editor.imageNotFound': '找不到圖片：{name}',
+  'slash.diagram': '圖表',
 
   'prefs.title': '偏好設定',
   'prefs.general': '一般',
@@ -287,6 +288,8 @@ export const zhTW: Messages = {
   'prefs.typing': '輸入',
   'prefs.autoPair': '自動配對括號與引號',
   'prefs.spellcheck': '拼字檢查',
+  'prefs.slashCommands': '斜線命令',
+  'prefs.slashHint': '輸入 / 快速插入標題、清單、表格等',
   'prefs.codeFences': '程式碼區塊',
   'prefs.lineNumbers': '顯示行號',
   'prefs.wrap': '自動換行',

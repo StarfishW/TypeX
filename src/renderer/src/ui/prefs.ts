@@ -147,7 +147,12 @@ export function openPreferences(host: PrefsHost, section = 'general'): void {
       'editor',
       'prefs.editor',
       [
-        group('prefs.typing', checkbox('autoPair', 'prefs.autoPair'), checkbox('spellcheck', 'prefs.spellcheck')),
+        group(
+          'prefs.typing',
+          checkbox('slashCommands', 'prefs.slashCommands', t('prefs.slashHint')),
+          checkbox('autoPair', 'prefs.autoPair'),
+          checkbox('spellcheck', 'prefs.spellcheck')
+        ),
         group(
           'prefs.codeFences',
           checkbox('codeLineNumbers', 'prefs.lineNumbers'),

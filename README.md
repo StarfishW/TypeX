@@ -39,6 +39,11 @@ To add or improve a translation, edit `src/shared/i18n/<language>.ts`. `npm test
   - Mermaid diagrams
   - `==highlight==`, `H~2~O` subscript, `x^2^` superscript and `:emoji:` shortcodes
   - inline HTML such as `<u>`, `<kbd>` and styled `<span>`
+- **Slash commands.** Type `/` at the start of a line or after a space to insert a block from a list: headings, lists, quotes, code, math, tables, diagrams, dividers, a table of contents, images, links, footnotes or front matter.
+  - Typing on filters the list, by name in the interface language or by English keywords (`/h2`, `/table`, `/todo`).
+  - ↑ and ↓ choose, Enter or Tab inserts, and Esc closes the list and keeps what you typed. One undo brings the typed text back.
+  - A slash inside a word, as in `and/or` or a path, opens nothing.
+  - Turn it off in **Preferences > Editor**.
 - **Code fences.** Syntax highlighting for over 100 languages, with a language field that suggests names.
 - **Tables.** A toolbar for alignment and for adding and deleting rows and columns. Tab and Enter move between cells.
 - **Source code mode** (`Ctrl+/`) shows the whole file as plain Markdown. The caret position carries over between modes.
@@ -137,7 +142,7 @@ This is what makes round-trips lossless. It also lets the syntax markers appear 
 | `keymap.ts`, `commands.ts` | Typing shortcuts, Enter/Backspace/Tab behaviour and all editing commands |
 | `clipboard.ts` | Copy writes Markdown and HTML; pasted HTML is converted to Markdown. |
 | `html.ts` | Renders a document to HTML for export, printing and the clipboard |
-| `search.ts`, `autocomplete.ts`, `plugins.ts` | Find and replace, emoji suggestions, focus tracking, task checkboxes and document invariants |
+| `search.ts`, `autocomplete.ts`, `slash.ts`, `plugins.ts` | Find and replace, emoji suggestions, the slash-command list, focus tracking, task checkboxes and document invariants |
 
 ## Not yet implemented
 

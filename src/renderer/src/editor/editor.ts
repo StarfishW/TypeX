@@ -27,6 +27,7 @@ import {
 } from './plugins'
 import { isInlineBlock, schema } from './schema'
 import { searchPlugin } from './search'
+import { slashPlugin } from './slash'
 
 const { nodes } = schema
 
@@ -76,7 +77,8 @@ export class Editor {
   ) {
     this.plugins = [
       selectionSyncPlugin(),
-      // Before the keymap, so Enter and Tab pick a suggestion while the list is open.
+      // Before the keymap, so Enter and Tab pick a suggestion while a list is open.
+      slashPlugin(),
       emojiCompletePlugin(),
       editorInputRules(),
       autoPairPlugin(),

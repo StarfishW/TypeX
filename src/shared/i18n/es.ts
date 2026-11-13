@@ -255,6 +255,7 @@ export const es: Messages = {
   'editor.emptyDiagram': 'Diagrama vacío',
   'editor.tocEmpty': 'Tabla de contenido: añade encabezados para llenarla',
   'editor.imageNotFound': 'No se encontró la imagen: {name}',
+  'slash.diagram': 'Diagrama',
 
   'prefs.title': 'Preferencias',
   'prefs.general': 'General',
@@ -292,6 +293,8 @@ export const es: Messages = {
   'prefs.typing': 'Escritura',
   'prefs.autoPair': 'Cerrar automáticamente paréntesis y comillas',
   'prefs.spellcheck': 'Revisión ortográfica',
+  'prefs.slashCommands': 'Comandos con barra',
+  'prefs.slashHint': 'Escribe / para insertar encabezados, listas, tablas y más',
   'prefs.codeFences': 'Bloques de código',
   'prefs.lineNumbers': 'Mostrar números de línea',
   'prefs.wrap': 'Ajustar líneas largas',

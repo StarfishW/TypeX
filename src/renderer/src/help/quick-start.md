@@ -21,6 +21,7 @@ Just type. A few characters at the start of a line turn it into a block:
 
 Inline styles work the same way: type `**bold**`, `*italic*`, `` `code` ``, `~~strike~~`, `==highlight==` or `[text](link)` and the markers fold away as soon as you move on. Put the caret back inside and they return, ready to edit.
 
+- Type **/** at the start of a line (or after a space) to pick a block from a list: headings, lists, tables, code, math, diagrams and more. Keep typing to filter it, for example `/h2` or `/table`. You can turn this off in **Preferences > Editor**.
 - Press **Enter** for a new paragraph and **Shift+Enter** for a line break.
 - Press **Tab** and **Shift+Tab** to indent and outdent list items, or to move between table cells.
 - Hold **Ctrl** and click a link to open it.

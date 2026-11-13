@@ -20,6 +20,8 @@ export interface Prefs {
   statusBar: boolean
   spellcheck: boolean
   autoPair: boolean
+  /** Typing "/" opens a list of blocks to insert. */
+  slashCommands: boolean
   inlineMath: boolean
   subscript: boolean
   superscript: boolean
@@ -55,6 +57,7 @@ export const DEFAULT_PREFS: Prefs = {
   statusBar: true,
   spellcheck: true,
   autoPair: true,
+  slashCommands: true,
   inlineMath: true,
   subscript: true,
   superscript: true,

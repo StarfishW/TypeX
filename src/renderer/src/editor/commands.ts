@@ -179,6 +179,15 @@ export const insertCodeBlock: Command = (state, dispatch) => {
   return insertBlock(state, dispatch, nodes.code_block.create(), 'inside')
 }
 
+/**
+ * Inserts an empty code fence with the given language (`mermaid` makes a
+ * diagram): in place of an empty paragraph, otherwise after the current block.
+ * Unlike insertCodeBlock, it never turns existing text into code.
+ */
+export function insertCodeFence(lang = ''): Command {
+  return (state, dispatch) => !inCode(state) && insertBlock(state, dispatch, nodes.code_block.create({ lang }), 'inside')
+}
+
 export const insertMathBlock: Command = (state, dispatch) =>
   !inCode(state) && insertBlock(state, dispatch, nodes.math_block.create(), 'inside')
 

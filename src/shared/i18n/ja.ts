@@ -253,6 +253,7 @@ export const ja: Messages = {
   'editor.emptyDiagram': '空の図',
   'editor.tocEmpty': '目次：見出しを追加するとここに表示されます',
   'editor.imageNotFound': '画像が見つかりません：{name}',
+  'slash.diagram': '図',
 
   'prefs.title': '環境設定',
   'prefs.general': '一般',
@@ -288,6 +289,8 @@ export const ja: Messages = {
   'prefs.typing': '入力',
   'prefs.autoPair': 'かっこと引用符を自動で閉じる',
   'prefs.spellcheck': 'スペルチェック',
+  'prefs.slashCommands': 'スラッシュコマンド',
+  'prefs.slashHint': '/ を入力して見出し・リスト・表などを挿入',
   'prefs.codeFences': 'コードブロック',
   'prefs.lineNumbers': '行番号を表示',
   'prefs.wrap': '長い行を折り返す',

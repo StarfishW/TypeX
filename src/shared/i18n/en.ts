@@ -278,6 +278,7 @@ export const en = {
   'editor.emptyDiagram': 'Empty diagram',
   'editor.tocEmpty': 'Table of contents: add headings to fill it',
   'editor.imageNotFound': 'Image not found: {name}',
+  'slash.diagram': 'Diagram',
 
   /* ------------------------------ preferences ----------------------------- */
   'prefs.title': 'Preferences',
@@ -315,6 +316,8 @@ export const en = {
   'prefs.typing': 'Typing',
   'prefs.autoPair': 'Auto pair brackets and quotes',
   'prefs.spellcheck': 'Spell check',
+  'prefs.slashCommands': 'Slash commands',
+  'prefs.slashHint': 'Type / to insert headings, lists, tables and more',
   'prefs.codeFences': 'Code fences',
   'prefs.lineNumbers': 'Show line numbers',
   'prefs.wrap': 'Wrap long lines',

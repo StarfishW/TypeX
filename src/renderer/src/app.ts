@@ -37,6 +37,7 @@ import { loadMath } from './editor/math'
 import { codeOptions } from './editor/nodeviews'
 import { schema } from './editor/schema'
 import { replaceAll, replaceCurrent, searchInfo, searchStep, setSearch } from './editor/search'
+import { slashOptions } from './editor/slash'
 import { buildExportHtml } from './exporter'
 import markdownReference from './help/markdown-reference.md?raw'
 import quickStart from './help/quick-start.md?raw'
@@ -386,6 +387,7 @@ export class App {
     document.body.classList.toggle('no-statusbar', !prefs.statusBar)
 
     pairOptions.enabled = prefs.autoPair
+    slashOptions.enabled = prefs.slashCommands
     codeOptions.lineNumbers = prefs.codeLineNumbers
     codeOptions.lineWrapping = prefs.codeWrap
     this.editor.setSpellcheck(prefs.spellcheck)
