@@ -66,9 +66,11 @@ const samplePath = join(out, 'sample.md')
 writeFileSync(samplePath, SAMPLE, 'utf8')
 
 const failures = []
+let passed = 0
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  ' + detail : ''}`)
-  if (!ok) failures.push(name)
+  if (ok) passed++
+  else failures.push(name)
 }
 
 const app = await electron.launch({
@@ -180,4 +182,12 @@ try {
 
 console.log(failures.length ? `\n${failures.length} check(s) failed` : '\nAll checks passed')
 console.log(`Artifacts: ${out}`)
+if (process.env.GITHUB_ACTIONS === 'true') {
+  // A one-line result on the workflow run page (also readable through the public API).
+  console.log(
+    failures.length
+      ? `::error title=smoke (${process.platform})::${failures.length} of ${passed + failures.length} checks failed: ${failures.join('; ')}`
+      : `::notice title=smoke (${process.platform})::${passed} checks passed`
+  )
+}
 process.exit(failures.length ? 1 : 0)

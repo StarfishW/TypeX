@@ -17,9 +17,11 @@ writeFileSync(docPath, 'start\n', 'utf8')
 copyFileSync(join(root, 'resources', 'icon.png'), join(out, 'icon.png'))
 
 const failures = []
+let passed = 0
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok || !detail ? '' : '\n      ' + detail}`)
-  if (!ok) failures.push(name)
+  if (ok) passed++
+  else failures.push(name)
 }
 const eq = (name, actual, expected) => check(name, actual === expected, `got ${JSON.stringify(actual)}\n      expected ${JSON.stringify(expected)}`)
 
@@ -520,4 +522,12 @@ try {
 
 console.log(failures.length ? `\n${failures.length} check(s) failed: ${failures.join('; ')}` : '\nAll checks passed')
 console.log(`Artifacts: ${out}`)
+if (process.env.GITHUB_ACTIONS === 'true') {
+  // A one-line result on the workflow run page (also readable through the public API).
+  console.log(
+    failures.length
+      ? `::error title=editing (${process.platform})::${failures.length} of ${passed + failures.length} checks failed: ${failures.join('; ')}`
+      : `::notice title=editing (${process.platform})::${passed} checks passed`
+  )
+}
 process.exit(failures.length ? 1 : 0)

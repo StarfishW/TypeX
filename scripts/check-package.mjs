@@ -31,9 +31,12 @@ const file = join(dir, 'packaged.md')
 writeFileSync(file, '# Packaged build\n\nIt **works**: $a^2 + b^2 = c^2$\n\n```js\nconst ok = true\n```\n')
 
 let failed = 0
+let passed = 0
+let shownTitle = ''
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok || !detail ? '' : '  ' + detail}`)
-  if (!ok) failed++
+  if (ok) passed++
+  else failed++
 }
 
 async function launch() {
@@ -68,6 +71,7 @@ let resources = ''
     check('code is highlighted', (await page.locator('#write .md-fences .tok-keyword').count()) >= 1)
     // macOS shows only the document name; the app name is in the menu bar.
     const title = await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].getTitle())
+    shownTitle = title
     check('window title', title === (process.platform === 'darwin' ? 'packaged.md' : 'packaged.md - TypeX'), title)
     resources = await app.evaluate(() => process.resourcesPath)
     check(
@@ -104,4 +108,13 @@ if (process.platform === 'win32' && resources) {
 }
 
 console.log(failed ? `\n${failed} check(s) failed` : '\nPackaged app works')
+if (process.env.GITHUB_ACTIONS === 'true') {
+  // A one-line result on the workflow run page (also readable through the public API).
+  const where = `packaged app (${process.platform} ${process.arch})`
+  console.log(
+    failed
+      ? `::error title=${where}::${failed} of ${passed + failed} checks failed`
+      : `::notice title=${where}::${passed} checks passed; window title "${shownTitle}"`
+  )
+}
 process.exit(failed ? 1 : 0)
