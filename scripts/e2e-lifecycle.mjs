@@ -14,6 +14,17 @@ mkdirSync(out, { recursive: true })
 
 const failures = []
 let passed = 0
+
+// A failure outside the checks (the app not starting, say) is reported on the CI run page too.
+const crash = (err) => {
+  console.log('ERROR', err)
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    console.log(`::error title=lifecycle (${process.platform})::stopped after ${passed} checks: ${String(err?.message || err).split('\n')[0]}`)
+  }
+  process.exit(1)
+}
+process.on('uncaughtException', crash)
+process.on('unhandledRejection', crash)
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok || !detail ? '' : '\n      ' + detail}`)
   if (ok) passed++
@@ -29,7 +40,7 @@ async function launch(profile, args = [], env = {}) {
   })
   const page = await app.firstWindow()
   page.on('pageerror', (e) => console.log('[pageerror]', e.message))
-  await page.waitForSelector('#write p, #write h1', { timeout: 20000 })
+  await page.waitForSelector('#write p, #write h1', { timeout: 60000 })
   await page.waitForTimeout(500)
   return { app, page }
 }

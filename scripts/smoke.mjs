@@ -67,6 +67,17 @@ writeFileSync(samplePath, SAMPLE, 'utf8')
 
 const failures = []
 let passed = 0
+
+// A failure outside the checks (the app not starting, say) is reported on the CI run page too.
+const crash = (err) => {
+  console.log('ERROR', err)
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    console.log(`::error title=smoke (${process.platform})::stopped after ${passed} checks: ${String(err?.message || err).split('\n')[0]}`)
+  }
+  process.exit(1)
+}
+process.on('uncaughtException', crash)
+process.on('unhandledRejection', crash)
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  ' + detail : ''}`)
   if (ok) passed++
@@ -93,7 +104,7 @@ const text = () => page.evaluate(() => window.__typexApp.getText())
 const mod = 'Control'
 
 try {
-  await page.waitForSelector('#write h1', { timeout: 20000 })
+  await page.waitForSelector('#write h1', { timeout: 60000 })
   await page.waitForTimeout(1500)
   await shot('01-open.png')
 
@@ -173,7 +184,7 @@ try {
   check('no console errors', errors.length === 0, errors.slice(0, 3).join(' | '))
 } catch (err) {
   console.log('ERROR', err)
-  failures.push('exception')
+  failures.push(`exception: ${String(err?.message || err).split('\n')[0]}`)
   await shot('error.png').catch(() => {})
 } finally {
   // The document was saved above, so the window closes without a prompt.

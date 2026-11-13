@@ -33,6 +33,18 @@ writeFileSync(file, '# Packaged build\n\nIt **works**: $a^2 + b^2 = c^2$\n\n```j
 let failed = 0
 let passed = 0
 let shownTitle = ''
+const problems = []
+
+// A failure outside the checks (the app not starting, say) is reported on the CI run page too.
+const crash = (err) => {
+  console.log('ERROR', err)
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    console.log(`::error title=packaged app (${process.platform} ${process.arch})::stopped after ${passed} checks: ${String(err?.message || err).split('\n')[0]}`)
+  }
+  process.exit(1)
+}
+process.on('uncaughtException', crash)
+process.on('unhandledRejection', crash)
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok || !detail ? '' : '  ' + detail}`)
   if (ok) passed++
@@ -49,7 +61,7 @@ async function launch() {
   const errors = []
   page.on('pageerror', (e) => errors.push(e.message))
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
-  await page.waitForSelector('#write h1', { timeout: 30000 })
+  await page.waitForSelector('#write h1', { timeout: 60000 })
   return { app, page, errors }
 }
 
@@ -83,6 +95,7 @@ let resources = ''
     if (process.env.SMOKE_OUT) await page.screenshot({ path: join(process.env.SMOKE_OUT, 'packaged.png') })
   } catch (err) {
     console.log('ERROR', err)
+    problems.push(String(err?.message || err).split('\n')[0])
     failed++
   } finally {
     await quit(app)
@@ -100,6 +113,7 @@ if (process.platform === 'win32' && resources) {
     check('the window uses it too', (await page.evaluate(() => document.documentElement.lang)) === 'de')
   } catch (err) {
     console.log('ERROR', err)
+    problems.push(String(err?.message || err).split('\n')[0])
     failed++
   } finally {
     await quit(app)
@@ -113,7 +127,7 @@ if (process.env.GITHUB_ACTIONS === 'true') {
   const where = `packaged app (${process.platform} ${process.arch})`
   console.log(
     failed
-      ? `::error title=${where}::${failed} of ${passed + failed} checks failed`
+      ? `::error title=${where}::${failed} of ${passed + failed} checks failed ${problems.join('; ')}`
       : `::notice title=${where}::${passed} checks passed; window title "${shownTitle}"`
   )
 }

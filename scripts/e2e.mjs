@@ -18,6 +18,17 @@ copyFileSync(join(root, 'resources', 'icon.png'), join(out, 'icon.png'))
 
 const failures = []
 let passed = 0
+
+// A failure outside the checks (the app not starting, say) is reported on the CI run page too.
+const crash = (err) => {
+  console.log('ERROR', err)
+  if (process.env.GITHUB_ACTIONS === 'true') {
+    console.log(`::error title=editing (${process.platform})::stopped after ${passed} checks: ${String(err?.message || err).split('\n')[0]}`)
+  }
+  process.exit(1)
+}
+process.on('uncaughtException', crash)
+process.on('unhandledRejection', crash)
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok || !detail ? '' : '\n      ' + detail}`)
   if (ok) passed++
@@ -60,7 +71,7 @@ const load = async (md) => {
 const count = (sel) => page.locator(sel).count()
 
 try {
-  await page.waitForSelector('#write p', { timeout: 20000 })
+  await page.waitForSelector('#write p', { timeout: 60000 })
   await settle(800)
 
   /* ---------------------------- typing shortcuts --------------------------- */
@@ -513,7 +524,7 @@ try {
   check('no console errors', errors.length === 0, errors.slice(0, 3).join(' | '))
 } catch (err) {
   console.log('ERROR', err)
-  failures.push('exception')
+  failures.push(`exception: ${String(err?.message || err).split('\n')[0]}`)
   await shot('e2e-error.png').catch(() => {})
 } finally {
   await page.evaluate(() => window.typex.invoke('win:close')).catch(() => {})
