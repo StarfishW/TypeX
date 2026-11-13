@@ -1,0 +1,140 @@
+# Builds and tests TypeX on Windows, macOS and Linux, and uploads the packages
+# as workflow artifacts. Pushing a version tag (v0.1.0, matching package.json)
+# publishes a GitHub release with every package attached and release notes
+# generated from the README.
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows
+            os: windows-latest
+          - name: macOS
+            os: macos-latest
+          - name: Linux
+            os: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # Linux needs a virtual display, and on Ubuntu 24.04 and later permission
+      # for the Chromium sandbox to create user namespaces.
+      - name: Prepare the Linux test environment
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
+      # The end-to-end suites press Windows and Linux shortcuts, so they run on
+      # those two systems. The macOS menu and its shortcuts are checked from
+      # within the suite, and the macOS package gets the launch check below.
+      - name: End-to-end tests
+        if: runner.os == 'Windows'
+        run: npm run e2e
+
+      - name: End-to-end tests
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" npm run e2e
+
+      - name: Package
+        run: npm run dist
+
+      - name: Check the packaged app
+        if: runner.os != 'Linux'
+        run: node scripts/check-package.mjs
+
+      - name: Check the packaged app
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum node scripts/check-package.mjs
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: TypeX-${{ matrix.name }}
+          path: |
+            dist/*.exe
+            dist/*.zip
+            dist/*.dmg
+            dist/*.AppImage
+            dist/*.tar.gz
+          if-no-files-found: error
+          retention-days: 30
+
+  # Kept apart from the build jobs, which run third-party install scripts, so
+  # that only this job holds a token that can write to the repository.
+  release:
+    name: Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check that the tag matches the version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          if [ "$TAG" != "v$VERSION" ]; then
+            echo "The tag $TAG does not match the version $VERSION in package.json." >&2
+            exit 1
+          fi
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: TypeX-*
+          merge-multiple: true
+          path: dist
+
+      - name: Write the release notes
+        env:
+          TAG: ${{ github.ref_name }}
+        run: node scripts/release-notes.mjs "$TAG" > release-notes.md
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          # Versions with a suffix, such as v0.2.0-beta.1, are marked as prereleases.
+          PRERELEASE=""
+          case "$TAG" in *-*) PRERELEASE="--prerelease" ;; esac
+          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --title "TypeX $TAG" --notes-file release-notes.md $PRERELEASE

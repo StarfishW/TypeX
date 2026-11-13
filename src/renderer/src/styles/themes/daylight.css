@@ -1,0 +1,4 @@
+/* Daylight: the default light theme. It uses the base values from content.css. */
+:root {
+  color-scheme: light;
+}

@@ -1,0 +1,38 @@
+/* Latte: a soft sepia theme that is easy on the eyes for long sessions. */
+:root {
+  color-scheme: light;
+  --bg-color: #f4ecd8;
+  --text-color: #4a3b2a;
+  --muted-color: #7d6a55;
+  --faint-color: #a08c75;
+  --meta-color: #b3a089;
+  --primary-color: #a8541a;
+  --border-color: #decfb0;
+  --rule-color: #d3c19d;
+  --heading-color: #3b2d1e;
+  --heading-border-color: #decfb0;
+  --code-bg-color: #ebe0c6;
+  --inline-code-bg-color: rgba(140, 110, 70, 0.18);
+  --blockquote-color: #6d5a45;
+  --blockquote-border-color: #c9b58f;
+  --table-header-bg-color: #ebe0c6;
+  --table-stripe-color: #f0e6cf;
+  --mark-bg-color: #f3d77a;
+  --select-text-bg-color: #e0c896;
+
+  --side-bar-bg-color: #ede3cc;
+  --control-text-color: #6d5a45;
+  --item-hover-bg-color: rgba(168, 84, 26, 0.08);
+  --active-file-bg-color: rgba(168, 84, 26, 0.15);
+
+  --tok-keyword: #a8341a;
+  --tok-string: #4d6b1f;
+  --tok-comment: #a08c75;
+  --tok-number: #2d5f8a;
+  --tok-definition: #7a3e9d;
+  --tok-type: #a8541a;
+  --tok-property: #2d5f8a;
+  --tok-tag: #4d6b1f;
+  --tok-operator: #4a3b2a;
+  --tok-meta: #a08c75;
+}

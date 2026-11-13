@@ -1,0 +1,76 @@
+/* Chalk: plain black on white with generous spacing and no decoration. */
+:root {
+  color-scheme: light;
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --muted-color: #666666;
+  --faint-color: #999999;
+  --meta-color: #b0b0b0;
+  --primary-color: #111111;
+  --border-color: #e2e2e2;
+  --rule-color: #e2e2e2;
+  --heading-border-color: transparent;
+  --code-bg-color: #f5f5f5;
+  --inline-code-bg-color: #f0f0f0;
+  --blockquote-color: #555555;
+  --blockquote-border-color: #111111;
+  --table-header-bg-color: transparent;
+  --table-stripe-color: transparent;
+  --mark-bg-color: #ffec99;
+  --select-text-bg-color: #d6d6d6;
+
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: #555555;
+  --item-hover-bg-color: rgba(0, 0, 0, 0.05);
+  --active-file-bg-color: rgba(0, 0, 0, 0.09);
+
+  --line-height: 1.8;
+  --write-width: 720px;
+
+  --tok-keyword: #111111;
+  --tok-string: #555555;
+  --tok-comment: #999999;
+  --tok-number: #111111;
+  --tok-definition: #111111;
+  --tok-type: #111111;
+  --tok-property: #444444;
+  --tok-tag: #111111;
+  --tok-operator: #111111;
+  --tok-meta: #999999;
+}
+
+#write h1,
+#write h2,
+#write h3,
+#write h4 {
+  font-weight: 700;
+  padding-bottom: 0;
+  letter-spacing: -0.01em;
+}
+#write h1 {
+  font-size: 2em;
+}
+#write h2 {
+  font-size: 1.5em;
+}
+#write a,
+#write .md-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+#write blockquote {
+  border-left-width: 2px;
+}
+#write th,
+#write td {
+  border-left: none;
+  border-right: none;
+}
+#write th {
+  border-top: none;
+  border-bottom: 2px solid #111111;
+}
+.tok-keyword,
+.tok-definition {
+  font-weight: 600;
+}

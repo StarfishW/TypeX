@@ -1,0 +1,71 @@
+/* Newsroom: serif type on warm paper, set like a printed column. */
+:root {
+  color-scheme: light;
+  --bg-color: #f6f3ec;
+  --text-color: #26221d;
+  --muted-color: #6f675c;
+  --faint-color: #94897b;
+  --meta-color: #a99f90;
+  --primary-color: #9a3412;
+  --border-color: #d9d2c3;
+  --rule-color: #26221d;
+  --heading-border-color: transparent;
+  --code-bg-color: #ece7db;
+  --inline-code-bg-color: rgba(120, 104, 80, 0.16);
+  --blockquote-color: #5c5346;
+  --blockquote-border-color: #b9ae9a;
+  --table-header-bg-color: #ece7db;
+  --table-stripe-color: #f1ede3;
+  --mark-bg-color: #f5e08a;
+  --select-text-bg-color: #dccfae;
+
+  --side-bar-bg-color: #efeadf;
+  --control-text-color: #5c5346;
+  --item-hover-bg-color: rgba(154, 52, 18, 0.07);
+  --active-file-bg-color: rgba(154, 52, 18, 0.13);
+
+  --font-text: Georgia, 'Iowan Old Style', 'Times New Roman', 'Songti SC', 'Noto Serif CJK SC', SimSun, serif;
+  --font-heading: var(--font-text);
+  --line-height: 1.75;
+  --write-width: 760px;
+
+  --tok-keyword: #9a3412;
+  --tok-string: #3f6212;
+  --tok-comment: #94897b;
+  --tok-number: #1e4e8c;
+  --tok-definition: #6b21a8;
+  --tok-type: #92400e;
+  --tok-property: #1e4e8c;
+  --tok-tag: #3f6212;
+  --tok-operator: #26221d;
+  --tok-meta: #94897b;
+}
+
+#write h1 {
+  font-size: 2.3em;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -0.01em;
+  padding-bottom: 0;
+}
+#write h2 {
+  font-weight: 700;
+  padding-bottom: 0;
+  margin-top: 1.7em;
+}
+#write h3,
+#write h4 {
+  font-style: italic;
+}
+#write hr {
+  width: 30%;
+  margin: 2em auto;
+  border-top-width: 1px;
+}
+#write blockquote {
+  font-style: italic;
+  border-left-width: 2px;
+}
+#write p {
+  margin: 0.9em 0;
+}

@@ -1,0 +1,47 @@
+/* Midnight: a dark theme for low light. */
+:root {
+  color-scheme: dark;
+  --bg-color: #1c1f24;
+  --text-color: #cdd3db;
+  --muted-color: #8b949e;
+  --faint-color: #6b7480;
+  --meta-color: #5f6772;
+  --primary-color: #6cb1ff;
+  --border-color: #343a43;
+  --rule-color: #343a43;
+  --heading-color: #e6eaef;
+  --heading-border-color: #2f353d;
+  --code-bg-color: #25292f;
+  --inline-code-bg-color: rgba(125, 135, 150, 0.26);
+  --blockquote-color: #9aa5b1;
+  --blockquote-border-color: #3d444d;
+  --table-header-bg-color: #262a31;
+  --table-stripe-color: #20242a;
+  --mark-bg-color: #6a5a12;
+  --select-text-bg-color: #2f5585;
+  --search-hit-color: #d9b84a;
+  --search-current-color: #ff9f43;
+
+  --side-bar-bg-color: #17191d;
+  --control-text-color: #9aa5b1;
+  --item-hover-bg-color: rgba(108, 177, 255, 0.1);
+  --active-file-bg-color: rgba(108, 177, 255, 0.2);
+
+  --tok-keyword: #ff7b72;
+  --tok-string: #a5d6ff;
+  --tok-comment: #8b949e;
+  --tok-number: #79c0ff;
+  --tok-definition: #d2a8ff;
+  --tok-type: #ffa657;
+  --tok-property: #79c0ff;
+  --tok-tag: #7ee787;
+  --tok-operator: #cdd3db;
+  --tok-meta: #8b949e;
+}
+
+#write .md-math-popup {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+#notice {
+  color: #f0f3f6;
+}

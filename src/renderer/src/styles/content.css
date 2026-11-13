@@ -1,0 +1,587 @@
+/*
+ * Document styles. Everything here applies to content inside #write, both in
+ * the live editor and in exported HTML/PDF. Themes restyle the document by
+ * overriding the custom properties declared on :root.
+ */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1f2328;
+  --muted-color: #656d76;
+  --faint-color: #8c959f;
+  --meta-color: #9aa4af;
+  --primary-color: #0969da;
+  --link-color: var(--primary-color);
+  --border-color: #d0d7de;
+  --rule-color: #d8dee4;
+  --heading-color: var(--text-color);
+  --heading-border-color: #d8dee4;
+  --code-bg-color: #f6f8fa;
+  --inline-code-bg-color: rgba(175, 184, 193, 0.22);
+  --blockquote-color: #57606a;
+  --blockquote-border-color: #d0d7de;
+  --table-header-bg-color: #f6f8fa;
+  --table-stripe-color: #f9fafb;
+  --mark-bg-color: #fff3a3;
+  --select-text-bg-color: #b6d7ff;
+  --search-hit-color: #ffe58f;
+  --search-current-color: #ffa94d;
+
+  --side-bar-bg-color: #f6f8fa;
+  --control-text-color: #57606a;
+  --item-hover-bg-color: rgba(9, 105, 218, 0.07);
+  --active-file-bg-color: rgba(9, 105, 218, 0.13);
+  --active-file-text-color: var(--text-color);
+
+  --font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, 'PingFang SC',
+    'Microsoft YaHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-heading: var(--font-text);
+  --font-mono: 'Cascadia Code', 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-size: 16px;
+  --line-height: 1.65;
+  --write-width: 860px;
+
+  --tok-keyword: #cf222e;
+  --tok-string: #0a3069;
+  --tok-comment: #6e7781;
+  --tok-number: #0550ae;
+  --tok-definition: #8250df;
+  --tok-type: #953800;
+  --tok-property: #0550ae;
+  --tok-tag: #116329;
+  --tok-operator: #24292f;
+  --tok-meta: #6e7781;
+}
+
+#write {
+  font-family: var(--font-text);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  overflow-wrap: break-word;
+  tab-size: 4;
+}
+
+#write ::selection {
+  background: var(--select-text-bg-color);
+}
+
+#write > :first-child {
+  margin-top: 0;
+}
+
+/* ------------------------------- text blocks ------------------------------ */
+
+#write p {
+  margin: 0.8em 0;
+}
+
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+  font-family: var(--font-heading);
+  color: var(--heading-color);
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.4em 0 0.6em;
+}
+#write h1 {
+  font-size: 2.1em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid var(--heading-border-color);
+}
+#write h2 {
+  font-size: 1.65em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid var(--heading-border-color);
+}
+#write h3 {
+  font-size: 1.35em;
+}
+#write h4 {
+  font-size: 1.15em;
+}
+#write h5 {
+  font-size: 1em;
+}
+#write h6 {
+  font-size: 1em;
+  color: var(--muted-color);
+}
+
+#write blockquote {
+  margin: 0.9em 0;
+  padding: 0 1em;
+  color: var(--blockquote-color);
+  border-left: 4px solid var(--blockquote-border-color);
+}
+
+#write hr {
+  border: none;
+  border-top: 2px solid var(--rule-color);
+  margin: 1.6em 0;
+  height: 0;
+}
+
+/* ---------------------------------- lists --------------------------------- */
+
+#write ul,
+#write ol {
+  margin: 0.8em 0;
+  padding-left: 1.9em;
+}
+#write li > p {
+  margin: 0.25em 0;
+}
+#write li > ul,
+#write li > ol {
+  margin: 0.15em 0;
+}
+#write .md-loose > li > p {
+  margin: 0.7em 0;
+}
+#write li.task-list-item {
+  list-style: none;
+  position: relative;
+}
+#write .md-task-checkbox {
+  position: absolute;
+  left: -1.45em;
+  top: 0.42em;
+  margin: 0;
+  width: 0.95em;
+  height: 0.95em;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+#write li.task-list-item > input[type='checkbox'] {
+  margin: 0 0.45em 0 -1.4em;
+  vertical-align: middle;
+  accent-color: var(--primary-color);
+}
+#write li.task-list-done > p {
+  color: var(--muted-color);
+}
+
+/* ------------------------------ inline content ---------------------------- */
+
+#write a,
+#write .md-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+#write a:hover,
+#write .md-link:hover {
+  text-decoration: underline;
+}
+#write strong {
+  font-weight: 600;
+}
+#write mark {
+  background: var(--mark-bg-color);
+  color: inherit;
+  border-radius: 2px;
+}
+#write code,
+#write kbd {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+#write code {
+  background: var(--inline-code-bg-color);
+  padding: 0.15em 0.38em;
+  border-radius: 4px;
+}
+#write kbd {
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--border-color);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--code-bg-color);
+}
+#write img {
+  max-width: 100%;
+}
+#write sup.md-footnote,
+#write .footnote-ref a {
+  color: var(--link-color);
+}
+
+/* Syntax markers: hidden until the caret touches the span they belong to. */
+#write .md-meta {
+  display: none;
+}
+#write .md-meta.md-show {
+  display: inline;
+  color: var(--meta-color);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+}
+#write .md-code-mark.md-show,
+#write .md-html-tag,
+#write .md-def,
+#write .md-math-src {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+#write .md-url.md-show {
+  overflow-wrap: anywhere;
+}
+#write .md-html-tag,
+#write .md-comment,
+#write .md-def {
+  color: var(--meta-color);
+}
+#write .md-math-src {
+  color: var(--muted-color);
+  background: var(--inline-code-bg-color);
+  border-radius: 3px;
+}
+#write .md-emoji,
+#write .md-entity {
+  font-style: normal;
+}
+
+#write .md-image {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+  cursor: default;
+}
+#write .md-image img {
+  display: block;
+  max-width: 100%;
+}
+#write .md-image-block {
+  display: block;
+  text-align: center;
+}
+#write .md-image-block img {
+  margin: 0 auto;
+}
+#write .md-image-error {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px dashed var(--border-color);
+  border-radius: 4px;
+  color: var(--muted-color);
+  font-size: 0.85em;
+}
+#write .md-image-error img {
+  display: none;
+}
+#write .md-image-error::after {
+  content: attr(data-label);
+}
+
+#write .md-math {
+  cursor: default;
+}
+#write .md-math-display {
+  display: block;
+  text-align: center;
+}
+#write .md-math-preview {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: baseline;
+}
+#write .md-math-popup {
+  position: absolute;
+  top: 1.4em;
+  left: 0;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 6px 14px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  white-space: nowrap;
+  pointer-events: none;
+}
+#write .md-math-error {
+  color: #cf222e;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+#write .md-html-widget {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+  white-space: normal;
+}
+#write .md-html-widget video,
+#write .md-html-widget iframe {
+  max-width: 100%;
+}
+
+/* --------------------------------- tables --------------------------------- */
+
+#write table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+#write th,
+#write td {
+  border: 1px solid var(--border-color);
+  padding: 6px 13px;
+  vertical-align: top;
+  min-width: 2.5em;
+}
+#write th {
+  font-weight: 600;
+  background: var(--table-header-bg-color);
+}
+#write tr:nth-child(2n) > td {
+  background: var(--table-stripe-color);
+}
+#write .selectedCell {
+  background: var(--select-text-bg-color) !important;
+}
+
+/* ------------------------- code, math and html blocks --------------------- */
+
+#write .md-fences,
+#write pre.code-block {
+  position: relative;
+  margin: 1em 0;
+  padding: 10px 14px;
+  background: var(--code-bg-color);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  line-height: 1.55;
+}
+#write pre.code-block {
+  overflow: auto;
+  white-space: pre;
+}
+#write pre.code-block code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+#write .md-fence-lang {
+  display: none;
+  position: absolute;
+  right: 10px;
+  bottom: 4px;
+  width: 9em;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--muted-color);
+  font: 12px var(--font-mono);
+  text-align: right;
+}
+#write .md-fences.md-focus .md-fence-lang {
+  display: block;
+}
+#write .md-fences.md-focus {
+  padding-bottom: 22px;
+}
+
+#write .md-source-block .cm-editor {
+  background: transparent;
+  color: var(--text-color);
+}
+#write .md-source-block .cm-editor.cm-focused {
+  outline: none;
+}
+#write .md-source-block .cm-scroller {
+  font-family: var(--font-mono);
+  line-height: 1.55;
+}
+#write .md-source-block .cm-content {
+  padding: 0;
+  caret-color: var(--text-color);
+}
+#write .md-source-block .cm-line {
+  padding: 0;
+}
+#write .md-source-block .cm-gutters {
+  background: transparent;
+  border: none;
+  color: var(--faint-color);
+  padding-right: 8px;
+}
+#write .cm-cursor,
+#source .cm-cursor {
+  border-left-color: var(--text-color);
+}
+#write .cm-selectionBackground,
+#source .cm-selectionBackground {
+  background: var(--select-text-bg-color) !important;
+}
+
+#write .md-preview {
+  white-space: normal;
+}
+#write .md-has-preview:not(.md-focus) .md-cm-host {
+  display: none;
+}
+#write .md-has-preview.md-focus .md-preview {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color);
+}
+#write .md-preview-empty,
+#write .md-preview-error {
+  color: var(--faint-color);
+  font-size: 0.9em;
+  text-align: center;
+  font-family: var(--font-text);
+}
+#write .md-preview-error {
+  color: #cf222e;
+  font-family: var(--font-mono);
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+#write .md-math-block,
+#write .math-block {
+  margin: 1em 0;
+  text-align: center;
+  overflow-x: auto;
+}
+#write .md-math-block.md-focus,
+#write .md-html-block.md-focus {
+  padding: 10px 14px;
+  background: var(--code-bg-color);
+  border-radius: 6px;
+  font-size: 0.88em;
+}
+#write .md-math-block .md-cm-host,
+#write .md-html-block .md-cm-host {
+  text-align: left;
+}
+#write .md-math-block.md-focus .md-preview {
+  font-size: 1.136em;
+}
+#write .md-html-block {
+  margin: 1em 0;
+}
+#write .md-html-block.md-focus .md-preview {
+  font-size: 1.136em;
+  font-family: var(--font-text);
+}
+#write .md-diagram,
+#write .diagram {
+  text-align: center;
+}
+#write .md-diagram svg,
+#write .diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+
+#write .md-front-matter {
+  margin: 0 0 1.2em;
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.85em;
+  color: var(--muted-color);
+}
+
+#write .md-toc,
+#write .toc {
+  margin: 1em 0;
+  padding: 0.7em 1.1em;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  white-space: normal;
+}
+#write .md-toc-item,
+#write .toc-item {
+  line-height: 1.9;
+}
+#write .md-toc-inner,
+#write .toc-item a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+#write .md-toc-empty {
+  color: var(--faint-color);
+  font-size: 0.9em;
+}
+
+#write .footnotes {
+  font-size: 0.9em;
+  color: var(--muted-color);
+}
+#write .footnotes-sep {
+  margin-top: 2.5em;
+}
+
+/* --------------------------- syntax highlighting -------------------------- */
+
+.tok-keyword,
+.tok-modifier,
+.tok-operatorKeyword {
+  color: var(--tok-keyword);
+}
+.tok-string,
+.tok-string2,
+.tok-inserted {
+  color: var(--tok-string);
+}
+.tok-comment {
+  color: var(--tok-comment);
+  font-style: italic;
+}
+.tok-number,
+.tok-bool,
+.tok-atom,
+.tok-literal {
+  color: var(--tok-number);
+}
+.tok-variableName.tok-definition,
+.tok-className,
+.tok-macroName,
+.tok-labelName {
+  color: var(--tok-definition);
+}
+.tok-typeName,
+.tok-namespace {
+  color: var(--tok-type);
+}
+.tok-propertyName,
+.tok-url,
+.tok-link {
+  color: var(--tok-property);
+}
+.tok-tagName,
+.tok-deleted {
+  color: var(--tok-tag);
+}
+.tok-operator,
+.tok-punctuation {
+  color: var(--tok-operator);
+}
+.tok-meta {
+  color: var(--tok-meta);
+}
+.tok-heading {
+  color: var(--tok-property);
+  font-weight: 600;
+}
+.tok-strong {
+  font-weight: 600;
+}
+.tok-emphasis {
+  font-style: italic;
+}
+.tok-invalid {
+  color: #cf222e;
+}
